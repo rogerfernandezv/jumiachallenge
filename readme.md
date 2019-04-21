@@ -27,7 +27,7 @@ php -S 0.0.0.0:8080 -t public/
 git clone https://github.com/rogerfernandezv/jumiachallenge
 
 # create container
-sudo docker build -f ./Dockerfile -t jumia/jumiachallenge .
+docker build -f ./Dockerfile -t jumia/jumiachallenge .
 
 # execute container
 docker run -itd --rm -v `pwd`:/var/www/jumia -p 9008:80 --name jumiachallenge.local jumia/jumiachallenge:latest
