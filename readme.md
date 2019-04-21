@@ -27,10 +27,10 @@ php -S 0.0.0.0:8080 -t public/
 git clone https://github.com/rogerfernandezv/jumiachallenge
 
 # create container
-sudo docker build -f ./Dockerfile -t jumia/jumia .
+sudo docker build -f ./Dockerfile -t jumia/jumiachallenge .
 
 # execute container
-docker run -itd --rm -v `pwd`:/var/www/jumia -p 9008:80 --name jumia.local jumia/jumia:latest
+docker run -itd --rm -v `pwd`:/var/www/jumia -p 9008:80 --name jumiachallenge.local jumia/jumiachallenge:latest
 
 ```
 
@@ -43,4 +43,4 @@ composer test
 
 ## Licença
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The JumiaChallenge is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

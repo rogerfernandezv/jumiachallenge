@@ -8,8 +8,8 @@ use Jumia\Action\CustomerAction;
 $action = new CustomerAction();
 
 // Check variables from POST
-$state = !empty($_POST['state']) ? $_POST['state'] : null;
-$countryCode = !empty($_POST['country']) ? $_POST['country'] : null;
+$state = !empty($_REQUEST['state']) ? $_REQUEST['state'] : null;
+$countryCode = !empty($_REQUEST['country']) ? $_REQUEST['country'] : null;
 
 if (empty($state) && empty($countryCode)) {
     $phones = $action->getPhones();
@@ -38,31 +38,34 @@ $countries = $action->getCountries();
                 <div class="col-md-8">
                     <div class="card card-default">
                         <div class="card-header">
-                            <img src="https://ng.jumia.is/cms/jumialogonew.png" class="logo">
+                            <img alt="Logo" src="https://ng.jumia.is/cms/jumialogonew.png" class="logo">
                             Phones
                         </div>
                         <div class="card-body">
                             <form method="post" action="index.php">
                             <div class="row">
                                 <div class="col">
-                                    <select class="form-control" name="country">
-                                        <option value="">Select Country</option>
+                                    <label for="country">Country</label>
+                                    <select class="form-control" id="country" name="country">
+                                        <option value="">Select Country(all)</option>
                                         <?php foreach ($countries as $country) :?>
-                                            <option value="<?php echo $country['code']; ?>"><?php echo $country['desc']; ?></option>
+                                            <option value="<?php echo $country['code']; ?>" <?php if(!is_null($countryCode) && $countryCode == $country['code']) echo 'selected'; ?>><?php echo $country['desc']; ?></option>
                                         <?php endforeach;?>
                                     </select>
                                 </div>
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-8">
-                                            <select class="form-control" name="state">
-                                                <option value="">Select State</option>
-                                                <option value="ok">Valid phone numbers</option>
-                                                <option value="nok">Invalid Phone numbers</option>
+                                            <label for="state">Country</label>
+                                            <select id="state" class="form-control" name="state">
+                                                <option value="">Select State(all)</option>
+                                                <option value="ok" <?php if(!is_null($state) && $state == 'ok') echo 'selected'; ?>>Valid phone numbers</option>
+                                                <option value="nok" <?php if(!is_null($state) && $state == 'nok') echo 'selected'; ?>>Invalid Phone numbers</option>
                                             </select>
                                         </div>
                                         <div class="col">
-                                            <button type="submit" class="btn-primary">Filter</button>
+                                            <br>
+                                            <button type="submit" style="margin-top: 5px;" class="btn btn-primary">Filter</button>
                                         </div>
                                     </div>
                                 </div>
@@ -71,10 +74,12 @@ $countries = $action->getCountries();
                             <br>
                             <table class="table">
                                 <thead>
-                                    <th>Country</th>
-                                    <th>State</th>
-                                    <th>Country Code</th>
-                                    <th>Phone number</th>
+                                    <tr>
+                                        <th>Country</th>
+                                        <th>State</th>
+                                        <th>Country Code</th>
+                                        <th>Phone number</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
 
